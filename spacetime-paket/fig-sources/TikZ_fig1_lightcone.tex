@@ -1,0 +1,23 @@
+% fig-sources/TikZ_fig1_lightcone.tex
+\documentclass[tikz,border=3pt]{standalone}
+\usepackage{tikz-3dplot}
+\begin{document}
+\tdplotsetmaincoords{80}{45}
+\begin{tikzpicture}[tdplot_main_coords,scale=1]
+  % axes
+  \draw[->] (-3,0,0)--(3,0,0) node[below left]{x};
+  \draw[->] (0,-3,0)--(0,3,0) node[below left]{y};
+  \draw[->] (0,0,-3)--(0,0,3) node[above]{t};
+  % cones (simple wireframes)
+  \foreach \r/\z in {0/0,0.6/0.9,1.2/1.8}{
+    \draw[black!60] (\r,0,\z) arc (0:360:\r and \r);
+    \draw[black!60] (\r,0,-\z) arc (0:360:\r and \r);
+  }
+  \draw[black] (0,0,0)--(0,0,2.4);
+  \draw[black] (0,0,0)--(0,0,-2.4);
+  % sample vectors
+  \draw[->,thin] (0,0,0)--(1.0,0.4,1.4) node[above right]{B (light-like)};
+  \draw[->,thin] (0,0,0)--(0.4,0.1,1.4) node[left]{A (time-like)};
+  \draw[->,thin] (0,0,0)--(2.0,0.0,1.0) node[right]{C (space-like)};
+\end{tikzpicture}
+\end{document}

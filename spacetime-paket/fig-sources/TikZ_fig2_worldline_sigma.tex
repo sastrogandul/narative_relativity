@@ -1,0 +1,29 @@
+% fig-sources/TikZ_fig2_worldline_sigma.tex
+\documentclass[tikz,border=3pt]{standalone}
+\usepackage{tikz-3dplot}
+\begin{document}
+\tdplotsetmaincoords{80}{35}
+\begin{tikzpicture}[tdplot_main_coords,scale=1]
+  % axes
+  \draw[->] (-2.5,0,0)--(2.5,0,0) node[below left]{x};
+  \draw[->] (0,-2.5,0)--(0,2.5,0) node[below left]{y};
+  \draw[->] (0,0,-0.5)--(0,0,4) node[above]{t};
+  % small cones at tau1 and tau2
+  \coordinate (O1) at (-0.6,-0.3,0.8);
+  \coordinate (O2) at (0.5,0.1,2.4);
+  \foreach \O/\s in {O1/0.35,O2/0.35}{
+    \draw[black!60] (\O) -- ++(0,0,\s*2);
+    \draw[black!60] (\O) -- ++(0,0,-\s*2);
+    \draw[black!60] ($( \O)+( \s,0,\s)$) arc (0:360:\s and \s);
+    \draw[black!60] ($( \O)+( \s,0,-\s)$) arc (0:360:\s and \s);
+  }
+  % worldlines A and B
+  \draw[line width=0.8pt] (-1.2,-0.8,0) to[out=65,in=225] (O1) to[out=55,in=210] (0.0,0.0,1.6) to[out=45,in=210] (O2) to[out=60,in=190] (1.4,0.2,3.6);
+  \draw[line width=0.8pt] (1.2,0.6,0) to[out=80,in=300] (0.6,0.2,1.2) to[out=80,in=290] (0.5,0.1,2.4) to[out=80,in=300] (0.3,0.05,3.6);
+  % sigma plane
+  \draw[black!50,fill=black!10,opacity=0.5] (-2,-2,1.6)--(2,-2,1.6)--(2,2,1.6)--(-2,2,1.6)--cycle;
+  \node at (-1.8,1.9,1.6) {$\Sigma$};
+  % meeting point M (optional)
+  \fill (0.2,0.1,2.2) circle (1.2pt) node[right] {M};
+\end{tikzpicture}
+\end{document}
